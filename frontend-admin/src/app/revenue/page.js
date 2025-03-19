@@ -14,7 +14,6 @@ const RevenuePage = () => {
   }, []);
 
   const fetchRevenueData = async () => {
-    // Dữ liệu mẫu giao dịch
     const fakeTransactions = [
       { id: 1, customer: "Nguyễn Văn A", car: "Toyota Vios", amount: 500000, date: "2025-03-01" },
       { id: 2, customer: "Trần Thị B", car: "Honda Civic", amount: 700000, date: "2025-03-05" },
@@ -25,7 +24,6 @@ const RevenuePage = () => {
     setTransactions(fakeTransactions);
     setTotalRevenue(fakeTransactions.reduce((sum, tx) => sum + tx.amount, 0));
 
-    // Dữ liệu doanh thu theo tháng
     const fakeMonthlyRevenue = [
       { month: "Jan", revenue: 10000000 },
       { month: "Feb", revenue: 12000000 },
@@ -37,13 +35,14 @@ const RevenuePage = () => {
   };
 
   return (
-    <div className="flex w-full h-screen bg-gray-100">
-      <Sidebar />
-      <div className="flex flex-col w-full p-6">
+    <div className="flex w-full h-screen bg-gray-100 overflow-hidden">
+      {/* Fix Sidebar */}
+      <Sidebar className="w-64 min-w-[250px] h-full flex-shrink-0" />
+
+      <div className="flex flex-col flex-1 p-6 overflow-auto ml-55">
         <h1 className="text-2xl font-bold mb-6">Báo cáo doanh thu</h1>
 
-        {/* Tổng doanh thu */}
-        <Card className="p-4 mb-6">
+        <Card className="p-4 mb-6 w-full">
           <CardContent>
             <h2 className="text-lg font-semibold">Tổng doanh thu</h2>
             <p className="text-2xl text-blue-600 font-bold">
@@ -52,45 +51,48 @@ const RevenuePage = () => {
           </CardContent>
         </Card>
 
-        {/* Biểu đồ doanh thu */}
-        <Card className="p-4 mb-6">
+        <Card className="p-4 mb-6 w-full">
           <CardContent>
             <h2 className="text-lg font-semibold mb-4">Doanh thu theo tháng</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={monthlyRevenue}>
-                <XAxis dataKey="month" stroke="#8884d8" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="revenue" fill="#82ca9d" barSize={40} />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="w-full max-w-full flex justify-center overflow-hidden">
+              <ResponsiveContainer width="90%" height={300}>
+                <BarChart data={monthlyRevenue}>
+                  <XAxis dataKey="month" stroke="#8884d8" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="revenue" fill="#82ca9d" barSize={40} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
 
-        {/* Danh sách giao dịch */}
-        <Card className="p-4">
+        {/* Fix Bảng Lịch sử giao dịch */}
+        <Card className="p-4 w-full">
           <CardContent>
             <h2 className="text-lg font-semibold mb-4">Lịch sử giao dịch</h2>
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-gray-200">
-                  <th className="p-2 text-left">Khách hàng</th>
-                  <th className="p-2 text-left">Xe thuê</th>
-                  <th className="p-2 text-right">Số tiền</th>
-                  <th className="p-2 text-right">Ngày thuê</th>
-                </tr>
-              </thead>
-              <tbody>
-                {transactions.map((tx) => (
-                  <tr key={tx.id} className="border-t">
-                    <td className="p-2">{tx.customer}</td>
-                    <td className="p-2">{tx.car}</td>
-                    <td className="p-2 text-right">{tx.amount.toLocaleString("vi-VN")} VND</td>
-                    <td className="p-2 text-right">{tx.date}</td>
+            <div className="w-full overflow-x-auto">
+              <table className="w-full border-collapse min-w-[600px]">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="p-2 text-left">Khách hàng</th>
+                    <th className="p-2 text-left">Xe thuê</th>
+                    <th className="p-2 text-right">Số tiền</th>
+                    <th className="p-2 text-right">Ngày thuê</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {transactions.map((tx) => (
+                    <tr key={tx.id} className="border-t">
+                      <td className="p-2">{tx.customer}</td>
+                      <td className="p-2">{tx.car}</td>
+                      <td className="p-2 text-right">{tx.amount.toLocaleString("vi-VN")} VND</td>
+                      <td className="p-2 text-right">{tx.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </CardContent>
         </Card>
       </div>
