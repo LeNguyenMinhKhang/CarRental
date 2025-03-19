@@ -35,9 +35,9 @@ const page = () => {
   };
 
   const handleEdit = (MaXe) => {
-    route.push(`/cars/${MaXe}`);
+    route.push(`/cars/editCar/${MaXe}`);
   };
-
+  
   const fetchCars = async () => {
     const cars = [
       {
@@ -84,7 +84,7 @@ const page = () => {
           <p className="">ID:&nbsp;{car.MaXe}</p>
           <p className="font-bold text-lg">{car.TenXe}</p>
           <p className="italic">{car.MoTa}</p>
-          <p className={`font-semibold ${car.TrangThai === "Đã cho thuê" ? "text-red-600" : "text-green-600"}`}>
+          <p className={`font-semibold ${car.TrangThai === "Sẵn sàng" ? "text-green-600":"text-red-600"}`}>
             Trạng thái: {car.TrangThai}
           </p>
           <div className="flex justify-end gap-4">
