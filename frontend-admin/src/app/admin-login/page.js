@@ -39,7 +39,7 @@ const Page = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#F9FDFF] p-6">
+        <div className="min-h-screen flex items-center justify-center bg-[#ffffff] p-6">
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
                 <Card className="w-[400px] max-w-lg border border-blue-500 shadow-lg p-6">
                     <CardHeader className="text-center">
