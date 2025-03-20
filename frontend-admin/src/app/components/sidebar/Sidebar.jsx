@@ -23,7 +23,7 @@ const SidebarItem = ({ path, icon, label }) => {
     <Button
       variant="ghost"
       className={`w-full justify-start mb-3 cursor-pointer flex items-center text-[15px] ${
-        isActive ? "text-white bg-[#fe0000]" : "text-black bg-transparent"
+        isActive ? "text-white bg-[#000000]" : "text-black bg-transparent"
       }`}
       onClick={handleClick}
     >

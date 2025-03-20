@@ -82,11 +82,10 @@ const Page = () => {
     } catch (error) {
       console.error(error);
       toast.error("Có lỗi xảy ra");
-    } finally {
-      setIsLoading(false);
     }
   };
-  
+
+  // Xử lý đăng nhập
   const onSubmitLogin = async (data) => {
     try {
       router.push("/");
@@ -94,11 +93,8 @@ const Page = () => {
     } catch (error) {
       console.error(error);
       toast.error("Có lỗi xảy ra");
-    } finally {
-      setIsLoading(false);
     }
   };
-  
 
   // Reset form khi chuyển tab
   useEffect(() => {
@@ -107,27 +103,31 @@ const Page = () => {
   }, [resetLoginForm, resetSignUpForm]);
 
   return (
-    <div className="min-h-screen bg-[#F9FDFF] flex items-center justify-center p-4 pt-20">
+    <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-20">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <Card className="w-full max-w-md border-[#062D76]">
+        <Card className="w-full max-w-md border-black">
           <CardHeader>
             <CardTitle className="flex justify-center">
-              <img src="/images/logo.jpg" alt="logo" className="w-20" />
+              <img src="/images/logo.jpg" alt="logo" className="w-20 grayscale" />
             </CardTitle>
-            <CardDescription className="text-center text-[#062D76]">
-            Mỗi cuốn sách là một cánh cửa mở ra thế giới tri thức
+            <CardDescription className="text-center text-black">
+              Trải nghiệm thuê xe chuyên nghiệp và dễ dàng
             </CardDescription>
           </CardHeader>
 
           <CardContent>
             <Tabs defaultValue="login" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 bg-slate-200">
-                <TabsTrigger value="login">Đăng nhập</TabsTrigger>
-                <TabsTrigger value="signup">Đăng ký</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 bg-gray-900 text-white">
+                <TabsTrigger value="login" className="text-white">
+                  Đăng nhập
+                </TabsTrigger>
+                <TabsTrigger value="signup" className="text-white">
+                  Đăng ký
+                </TabsTrigger>
               </TabsList>
 
               {/* Đăng nhập */}
@@ -140,6 +140,7 @@ const Page = () => {
                         type="email"
                         {...registerLogin("email")}
                         placeholder="Nhập email của bạn"
+                        className="border-black"
                       />
                       {errorsLogin.email && (
                         <p className="text-red-500">{errorsLogin.email.message}</p>
@@ -151,12 +152,13 @@ const Page = () => {
                         type="password"
                         {...registerLogin("password")}
                         placeholder="Nhập mật khẩu của bạn"
+                        className="border-black"
                       />
                       {errorsLogin.password && (
                         <p className="text-red-500">{errorsLogin.password.message}</p>
                       )}
                     </div>
-                    <Button type="submit" className="w-full bg-[#062D76] text-white">
+                    <Button type="submit" className="w-full bg-black text-white">
                       <LogIn className="mr-2 w-4 h-4" /> Đăng nhập
                     </Button>
                   </div>
@@ -173,6 +175,7 @@ const Page = () => {
                         type="text"
                         {...registerSignUp("username")}
                         placeholder="Nhập tên người dùng"
+                        className="border-black"
                       />
                     </div>
                     <div>
@@ -181,6 +184,7 @@ const Page = () => {
                         type="email"
                         {...registerSignUp("email")}
                         placeholder="Nhập email của bạn"
+                        className="border-black"
                       />
                     </div>
                     <div>
@@ -189,11 +193,12 @@ const Page = () => {
                         type="password"
                         {...registerSignUp("password")}
                         placeholder="Nhập mật khẩu"
+                        className="border-black"
                       />
                     </div>
                     <div>
                       <Label>Ngày sinh</Label>
-                      <Input type="date" {...registerSignUp("dateOfBirth")} />
+                      <Input type="date" {...registerSignUp("dateOfBirth")} className="border-black" />
                     </div>
                     <div>
                       <Label>Giới tính</Label>
@@ -201,7 +206,7 @@ const Page = () => {
                         name="gender"
                         control={control}
                         render={({ field }) => (
-                          <RadioGroup value={field.value} onValueChange={field.onChange}>
+                          <RadioGroup value={field.value} onValueChange={field.onChange} className="text-black">
                             <RadioGroupItem value="male" id="male" /> Nam
                             <RadioGroupItem value="female" id="female" /> Nữ
                             <RadioGroupItem value="other" id="other" /> Khác
@@ -209,7 +214,7 @@ const Page = () => {
                         )}
                       />
                     </div>
-                    <Button type="submit" className="w-full bg-[#062D76] text-white">
+                    <Button type="submit" className="w-full bg-black text-white">
                       Đăng ký
                     </Button>
                   </div>
